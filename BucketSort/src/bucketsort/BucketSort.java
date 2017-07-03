@@ -60,7 +60,7 @@ public class BucketSort {
         sc.close();
         inputArr = intArr.stream().mapToInt(i->i).toArray();
             
-        
+        // Output must be an integer array; int []
         
         return inputArr;
     }
@@ -70,8 +70,8 @@ public class BucketSort {
         ArrayList<Integer> sorted = new ArrayList<>();
         
         // Get min and max values
-        int min = 0;
-        int max = 0;
+        int min = list.get(0);
+        int max = list.get(0);
         
         for (Integer arr : list) {
             if(arr < min)
@@ -88,6 +88,20 @@ public class BucketSort {
         
         ArrayList<Integer> sorted = new ArrayList<>();
         
+        int count = list.size();
+        
+        // Get min and max values
+        int min = list.get(0);
+        int max = list.get(0);
+        
+        for (Integer arr : list) {
+            if(arr < min)
+                min = arr;
+            if(arr > max)
+                max = arr;
+        }
+        
+        int range = max - min + 1;
         return sorted;
     }
     
