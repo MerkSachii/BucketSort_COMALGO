@@ -21,11 +21,13 @@ public class BucketSort {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        int[] input = getInput();
-        System.out.println("Printing...");
-        for(int i = 0; i < input.length; i++) {
-            System.out.print(Integer.toString(input[i]) + " ");
-        }
+//        int[] input = getInput();
+//        System.out.println("Printing...");
+//        for(int i = 0; i < input.length; i++) {
+//            System.out.print(Integer.toString(input[i]) + " ");
+//        }
+        // Temporarily unavailable
+        
         
     }
     
@@ -63,6 +65,30 @@ public class BucketSort {
         return inputArr;
     }
     
+    public static ArrayList bucketSort(ArrayList<Integer> list) {
+        
+        ArrayList<Integer> sorted = new ArrayList<>();
+        
+        // Get min and max values
+        int min = 0;
+        int max = 0;
+        
+        for (Integer arr : list) {
+            if(arr < min)
+                min = arr;
+            if(arr > max)
+                max = arr;
+        }
+        
+        return sorted;
+        
+    }
     
+    public static ArrayList countingSort(ArrayList<Integer> list) {
+        
+        ArrayList<Integer> sorted = new ArrayList<>();
+        
+        return sorted;
+    }
     
 }
