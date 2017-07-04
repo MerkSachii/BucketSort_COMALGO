@@ -6,6 +6,7 @@
 package bucketsort;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -14,7 +15,7 @@ import java.util.Scanner;
  * @author Mark Christian Sanchez
  */
 public class BucketSort {
-
+    private static final int BUCKET_SIZE = 5;
     /**
      * @param args the command line arguments
      */
@@ -28,7 +29,9 @@ public class BucketSort {
 //        }
         // Temporarily unavailable
         
-        
+        Integer[] list = {1,3,2,9,8,7,6,5,2,4,8};
+        Integer[] sorted = bucketSort(list);
+        System.out.println("Debug: " + Arrays.toString(sorted));
     }
     
     public static int[] getInput() {
@@ -65,44 +68,66 @@ public class BucketSort {
         return inputArr;
     }
     
-    public static ArrayList bucketSort(ArrayList<Integer> list) {
+    public static Integer[] bucketSort(Integer[] list) {
         
-        ArrayList<Integer> sorted = new ArrayList<>();
         
         // Get min and max values
-        int min = list.get(0);
-        int max = list.get(0);
+        Integer min = list[0];
+        Integer max = list[0];
         
-        for (Integer arr : list) {
-            if(arr < min)
-                min = arr;
-            if(arr > max)
-                max = arr;
+        for (int i = 1; i < list.length; i++) {
+            if(list[i] < min) {
+                min = list[i];
+            }
+            else if(list[i] > max) {
+                max = list[i];
+            }
+        }
+        System.out.println("MaxVal: " + max);
+        
+        int noOfBuckets = (max - min) / BUCKET_SIZE + 1;
+        List<List<Integer>> buckets = new ArrayList<List<Integer>>(noOfBuckets);
+        for(int i = 0; i < noOfBuckets; i++) {
+            buckets.add(new ArrayList<Integer>());
         }
         
-        return sorted;
+        for(int i = 0; i < list.length; i++ ) {
+            // Distribute values into buckets
+            buckets.get((list[i] - min) / BUCKET_SIZE).add(list[i]);
+            System.out.println("DEBUG: i -> " + list[i]);
+            System.out.println("DEBUG: (MIN,MAX) = (" + min +","+ max +")");
+        } 
         
+        int pos = 0;
+        for(int i = 0; i < buckets.size(); i++) {
+            Integer[] bucketArr = new Integer[buckets.get(i).size()];
+            // Do insertion sort
+            System.out.println("BuckArr: " + Arrays.toString(bucketArr));
+//            insertionSort(bucketArr);
+            for(int j = 0; j < bucketArr.length; j++) {
+                list[pos++] = bucketArr[j];
+            }
+        }
+        
+        return list;
     }
     
-    public static ArrayList countingSort(ArrayList<Integer> list) {
+    public static Integer[] insertionSort(Integer[] list) {
         
-        ArrayList<Integer> sorted = new ArrayList<>();
-        
-        int count = list.size();
-        
-        // Get min and max values
-        int min = list.get(0);
-        int max = list.get(0);
-        
-        for (Integer arr : list) {
-            if(arr < min)
-                min = arr;
-            if(arr > max)
-                max = arr;
+        int length = list.length;
+        for(int j = 1; j < length; j++) {
+            
+            int key = list[j];
+            int before = j - 1;
+            while ( (before > -1) && (list[before] > key)) {
+                list[before+1] = list[before];
+                before--;
+            }
+            list[before+1] = key;
         }
         
-        int range = max - min + 1;
-        return sorted;
+        return list;
     }
+
     
 }
