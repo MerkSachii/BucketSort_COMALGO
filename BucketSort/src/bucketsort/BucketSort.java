@@ -29,7 +29,7 @@ public class BucketSort {
 //        }
         // Temporarily unavailable
         
-        Integer[] list = {119,143,619,301,110};
+        Integer[] list = {110,-143,619,301,110};
         Integer[] sorted = bucketSort(list);
         System.out.println("Debug: " + Arrays.toString(sorted));
     }
