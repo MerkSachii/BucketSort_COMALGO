@@ -29,7 +29,7 @@ public class BucketSort {
 //        }
         // Temporarily unavailable
         
-        Integer[] list = {1,3,2,9,8,7,6,5,2,4,8};
+        Integer[] list = {119,143,619,301,110};
         Integer[] sorted = bucketSort(list);
         System.out.println("Debug: " + Arrays.toString(sorted));
     }
@@ -96,14 +96,15 @@ public class BucketSort {
             buckets.get((list[i] - min) / BUCKET_SIZE).add(list[i]);
             System.out.println("DEBUG: i -> " + list[i]);
             System.out.println("DEBUG: (MIN,MAX) = (" + min +","+ max +")");
-        } 
+        }
         
         int pos = 0;
         for(int i = 0; i < buckets.size(); i++) {
             Integer[] bucketArr = new Integer[buckets.get(i).size()];
             // Do insertion sort
+            bucketArr = buckets.get(i).toArray(bucketArr);
             System.out.println("BuckArr: " + Arrays.toString(bucketArr));
-//            insertionSort(bucketArr);
+            insertionSort(bucketArr);
             for(int j = 0; j < bucketArr.length; j++) {
                 list[pos++] = bucketArr[j];
             }
