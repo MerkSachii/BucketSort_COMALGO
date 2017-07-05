@@ -29,7 +29,7 @@ public class BucketSort {
 //        }
         // Temporarily unavailable
         
-        Integer[] list = {110,-143,619,301,-110};
+        Integer[] list = {110,110,110,110,111,112,113,114,100};
         Integer[] sorted = bucketSort(list);
         System.out.println("Debug: " + Arrays.toString(sorted));
     }
@@ -59,7 +59,6 @@ public class BucketSort {
                 sc.next();
             }
         }
-        System.out.println("Asan ba ako nagkamali");
         sc.close();
         inputArr = intArr.stream().mapToInt(i->i).toArray();
             
@@ -95,8 +94,6 @@ public class BucketSort {
         for(int i = 0; i < list.length; i++ ) {
             // Distribute values into buckets
             buckets.get((list[i] - min) / BUCKET_SIZE).add(list[i]);
-            System.out.println("DEBUG: i -> " + list[i]);
-            System.out.println("DEBUG: (MIN,MAX) = (" + min +","+ max +")");
         }
         
         int pos = 0;
@@ -104,7 +101,7 @@ public class BucketSort {
             Integer[] bucketArr = new Integer[buckets.get(i).size()];
             //Get the bucket
             bucketArr = buckets.get(i).toArray(bucketArr);
-            System.out.println("BuckArr: " + Arrays.toString(bucketArr));
+            System.out.println("BuckArr " + i + ": " + Arrays.toString(bucketArr));
             //Pass the bucket for insertion sort
             insertionSort(bucketArr);
             for(int j = 0; j < bucketArr.length; j++) {
@@ -116,19 +113,73 @@ public class BucketSort {
     }
     
     public static Integer[] insertionSort(Integer[] list) {
-        
-        int length = list.length;
-        for(int j = 1; j < length; j++) {
-            
-            int key = list[j];
-            int before = j - 1;
-            while ( (before > -1) && (list[before] > key)) {
-                list[before+1] = list[before];
-                before--;
-            }
-            list[before+1] = key;
+       
+        if(list.length < 2) {
+            // Return if there is no content
+            return list;
         }
         
+        else {
+            int length = list.length;
+            
+            for(int j = 1; j < length; j++) {
+            
+                int key = list[j];
+                int before = j - 1;
+                while ( (before > -1) && (list[before] > key)) {
+                    list[before+1] = list[before];
+                    before--;
+                }
+                list[before+1] = key;
+            }
+            
+        }
+        
+        
+        
+        return list;
+    }
+    
+    public static Integer[] recursiveBucketSort(Integer[] list, int bit) {
+        
+        boolean popable = false;
+        //Check if the Integer[] has one or less values
+        
+        if(popable) {
+            return list;
+        }
+        
+        else {
+            
+            // Get min and max values
+            Integer min = list[0];
+            Integer max = list[0];
+
+            for (int i = 1; i < list.length; i++) {
+                if(list[i] < min) {
+                    min = list[i];
+                }
+                else if(list[i] > max) {
+                    max = list[i];
+                }
+            }
+            System.out.println("MaxVal: " + max);
+            // Initialize buckets
+            int noOfBuckets = (max - min) / BUCKET_SIZE + 1;
+            // Create an array that holds buckets
+            List<List<Integer>> buckets = new ArrayList<List<Integer>>(noOfBuckets);
+            for(int i = 0; i < noOfBuckets; i++) {
+                buckets.add(new ArrayList<Integer>());
+            }
+
+            for(int i = 0; i < list.length; i++ ) {
+                // Distribute values into buckets
+                buckets.get((list[i] - min) / BUCKET_SIZE).add(list[i]);
+            }
+            
+            
+            
+        }
         return list;
     }
 
