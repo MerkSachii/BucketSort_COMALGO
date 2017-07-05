@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * COMALGO S21
+ * Authors
+ * Mark Christian Sanchez
+ * Miguel Jason Cruz
  */
 package bucketsort;
 
@@ -140,6 +141,7 @@ public class BucketSort {
         return list;
     }
     
+    // Partially complete bucketsort
     public static Integer[] recursiveBucketSort(Integer[] list, int bit) {
         
         boolean popable = false;
