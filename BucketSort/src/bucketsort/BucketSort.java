@@ -29,7 +29,7 @@ public class BucketSort {
 //        }
         // Temporarily unavailable
         
-        Integer[] list = {110,-143,619,301,110};
+        Integer[] list = {110,-143,619,301,-110};
         Integer[] sorted = bucketSort(list);
         System.out.println("Debug: " + Arrays.toString(sorted));
     }
@@ -84,8 +84,9 @@ public class BucketSort {
             }
         }
         System.out.println("MaxVal: " + max);
-        
+        // Initialize buckets
         int noOfBuckets = (max - min) / BUCKET_SIZE + 1;
+        // Create an array that holds buckets
         List<List<Integer>> buckets = new ArrayList<List<Integer>>(noOfBuckets);
         for(int i = 0; i < noOfBuckets; i++) {
             buckets.add(new ArrayList<Integer>());
@@ -101,9 +102,10 @@ public class BucketSort {
         int pos = 0;
         for(int i = 0; i < buckets.size(); i++) {
             Integer[] bucketArr = new Integer[buckets.get(i).size()];
-            // Do insertion sort
+            //Get the bucket
             bucketArr = buckets.get(i).toArray(bucketArr);
             System.out.println("BuckArr: " + Arrays.toString(bucketArr));
+            //Pass the bucket for insertion sort
             insertionSort(bucketArr);
             for(int j = 0; j < bucketArr.length; j++) {
                 list[pos++] = bucketArr[j];
